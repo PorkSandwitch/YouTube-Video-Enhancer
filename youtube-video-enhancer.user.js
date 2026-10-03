@@ -1,8 +1,12 @@
 // ==UserScript==
-// @name         YouTube Low-Lag Video Enhancer
-// @namespace    youtube-enhancer
-// @version      11.0
+// @name         YouTube Video Enhancer
+// @version      1.0
 // @description  Lightweight YouTube video enhancement designed for low-end PCs
+// @author        PorkSandwitch
+// @homepageURL   https://github.com/PorkSandwitch/YouTube-Video-Enhancer
+// @supportURL    https://github.com/PorkSandwitch/YouTube-Video-Enhancer/issues
+// @downloadURL   https://raw.githubusercontent.com/PorkSandwitch/YouTube-Video-Enhancer/main/youtube-video-enhancer.user.js
+// @updateURL     https://raw.githubusercontent.com/PorkSandwitch/YouTube-Video-Enhancer/main/youtube-video-enhancer.user.js
 // @match        https://www.youtube.com/*
 // @run-at       document-idle
 // @grant        GM_getValue
@@ -39,21 +43,10 @@
     let lastVideoWidth = 0;
     let lastVideoHeight = 0;
 
-    /*
-     * The important fullscreen position state.
-     *
-     * normalPosition = the last known position while NOT fullscreen.
-     *
-     * We deliberately do not modify this position while fullscreen.
-     * This prevents YouTube fullscreen resizing from moving the panel.
-     */
     let normalPosition = null;
 
     let restorePositionTimer = null;
 
-    /*
-     * Load settings
-     */
     currentStrength = clamp(
         Number(
             GM_getValue(
@@ -77,12 +70,6 @@
         'ytEnhancerAuto',
         DEFAULT_AUTO
     );
-
-    /*
-     * ------------------------------------------------------------
-     * Utility
-     * ------------------------------------------------------------
-     */
 
     function clamp(value, min, max) {
         return Math.min(
@@ -117,12 +104,6 @@
             height
         };
     }
-
-    /*
-     * ------------------------------------------------------------
-     * Enhancement
-     * ------------------------------------------------------------
-     */
 
     function getAutoMultiplier(video) {
         const resolution = getResolution(video);
@@ -245,12 +226,6 @@
         updateUI();
     }
 
-    /*
-     * ------------------------------------------------------------
-     * Settings
-     * ------------------------------------------------------------
-     */
-
     function enableAuto() {
         autoEnhance = true;
 
@@ -327,12 +302,6 @@
             currentStrength
         );
     }
-
-    /*
-     * ------------------------------------------------------------
-     * UI information
-     * ------------------------------------------------------------
-     */
 
     function getResolutionText(video) {
         const resolution =
@@ -446,14 +415,6 @@
         }
     }
 
-    /*
-     * ------------------------------------------------------------
-     * Position handling
-     * ------------------------------------------------------------
-     *
-     * This is intentionally separate from fullscreen handling.
-     */
-
     function getPanelPosition() {
         if (!panel) {
             return null;
@@ -510,12 +471,6 @@
         }
     }
 
-    /*
-     * Clamp the panel only when necessary.
-     *
-     * This does NOT constantly rewrite the saved position.
-     * That is important for fullscreen transitions.
-     */
     function keepInsideScreen() {
         if (
             !panel ||
@@ -575,13 +530,6 @@
         }
     }
 
-    /*
-     * Restore the user's normal-screen position.
-     *
-     * IMPORTANT:
-     * We restore from normalPosition rather than calculating
-     * a new position from the fullscreen viewport.
-     */
     function restoreNormalPosition() {
         if (
             !panel ||
@@ -624,11 +572,6 @@
                 'auto';
         }
 
-        /*
-         * Give the browser one frame to calculate the panel
-         * after fullscreen has ended, then only clamp if it
-         * genuinely ended up outside the screen.
-         */
         requestAnimationFrame(() => {
             if (
                 document.fullscreenElement ||
@@ -640,12 +583,6 @@
             keepInsideScreen();
         });
     }
-
-    /*
-     * ------------------------------------------------------------
-     * Styles
-     * ------------------------------------------------------------
-     */
 
     function createStyles() {
         if (
@@ -1145,12 +1082,6 @@
         document.head.appendChild(style);
     }
 
-    /*
-     * ------------------------------------------------------------
-     * Panel
-     * ------------------------------------------------------------
-     */
-
     function createPanel() {
         if (
             document.getElementById(
@@ -1386,12 +1317,6 @@
 
         updateUI();
 
-        /*
-         * --------------------------------------------------------
-         * Slider
-         * --------------------------------------------------------
-         */
-
         slider.addEventListener(
             'input',
             () => {
@@ -1437,12 +1362,6 @@
             }
         );
 
-        /*
-         * --------------------------------------------------------
-         * Presets
-         * --------------------------------------------------------
-         */
-
         presetSelect.addEventListener(
             'change',
             () => {
@@ -1451,12 +1370,6 @@
                 );
             }
         );
-
-        /*
-         * --------------------------------------------------------
-         * Auto
-         * --------------------------------------------------------
-         */
 
         autoCheckbox.addEventListener(
             'change',
@@ -1489,12 +1402,6 @@
                 }
             }
         );
-
-        /*
-         * --------------------------------------------------------
-         * Dragging
-         * --------------------------------------------------------
-         */
 
         handle.addEventListener(
             'pointerdown',
@@ -1529,10 +1436,6 @@
                 panel.style.transition =
                     'none';
 
-                /*
-                 * While dragging, always use explicit
-                 * left/top coordinates.
-                 */
                 panel.style.width =
                     '46px';
 
@@ -1626,11 +1529,6 @@
 
                 keepInsideScreen();
 
-                /*
-                 * This is the important part:
-                 * save the position only after the user
-                 * actually finishes dragging.
-                 */
                 saveNormalPosition();
             };
 
@@ -1644,17 +1542,8 @@
             stopDragging
         );
 
-        /*
-         * Restore the last normal-screen position.
-         */
         restoreNormalPosition();
     }
-
-    /*
-     * ------------------------------------------------------------
-     * Video detection
-     * ------------------------------------------------------------
-     */
 
     function handleVideoChange() {
         const video =
@@ -1783,17 +1672,6 @@
         handleVideoChange();
     }
 
-    /*
-     * ------------------------------------------------------------
-     * YouTube navigation
-     * ------------------------------------------------------------
-     *
-     * We no longer use a page-wide MutationObserver.
-     *
-     * YouTube provides navigation events, and the video element
-     * itself provides metadata/resize events.
-     */
-
     function setupYouTubeNavigation() {
         document.addEventListener(
             'yt-navigate-finish',
@@ -1817,11 +1695,6 @@
             }
         );
 
-        /*
-         * YouTube can update its player without a normal
-         * navigation. This event is cheap and useful when
-         * available.
-         */
         document.addEventListener(
             'yt-player-updated',
             () => {
@@ -1833,30 +1706,13 @@
         );
     }
 
-    /*
-     * ------------------------------------------------------------
-     * Fullscreen
-     * ------------------------------------------------------------
-     *
-     * No polling.
-     *
-     * The browser tells us when fullscreen changes.
-     */
-
     function handleFullscreenChange() {
         if (!panel) {
             return;
         }
 
         if (document.fullscreenElement) {
-            /*
-             * IMPORTANT:
-             *
-             * Capture the position BEFORE hiding the panel.
-             * We do not call keepInsideScreen() here because the
-             * fullscreen viewport may have completely different
-             * dimensions.
-             */
+
             const position =
                 getPanelPosition();
 
@@ -1870,21 +1726,12 @@
                 );
             }
 
-            /*
-             * Hide the enhancer during fullscreen.
-             */
             panel.style.display =
                 'none';
 
             return;
         }
 
-        /*
-         * Fullscreen ended.
-         *
-         * Show the panel and restore the exact position it had
-         * before fullscreen.
-         */
         panel.style.display =
             '';
 
@@ -1894,10 +1741,6 @@
             );
         }
 
-        /*
-         * A small delay allows YouTube/browser to finish its
-         * fullscreen layout transition.
-         */
         restorePositionTimer =
             setTimeout(
                 () => {
@@ -1909,19 +1752,6 @@
                 80
             );
     }
-
-    /*
-     * ------------------------------------------------------------
-     * Window resize
-     * ------------------------------------------------------------
-     *
-     * IMPORTANT:
-     *
-     * We do NOT save the position on every resize anymore.
-     *
-     * Previously a fullscreen/window resize could overwrite the
-     * position that should have been restored later.
-     */
 
     function setupResizeHandler() {
         window.addEventListener(
@@ -1942,12 +1772,6 @@
         );
     }
 
-    /*
-     * ------------------------------------------------------------
-     * Initialization
-     * ------------------------------------------------------------
-     */
-
     function initialize() {
         createPanel();
 
@@ -1962,12 +1786,6 @@
         setupYouTubeNavigation();
         setupResizeHandler();
 
-        /*
-         * Initial video detection.
-         *
-         * These are only a few startup checks, not a permanent
-         * polling loop.
-         */
         scanVideo();
 
         setTimeout(
@@ -1985,12 +1803,6 @@
             3000
         );
     }
-
-    /*
-     * ------------------------------------------------------------
-     * Start
-     * ------------------------------------------------------------
-     */
 
     if (
         document.readyState ===

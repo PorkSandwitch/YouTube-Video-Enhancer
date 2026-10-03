@@ -24,6 +24,20 @@ Tampermonkey will open the installation page. Click **Install** and you're done.
 - Saves your settings and panel position
 - Works with YouTube navigation and fullscreen
 
+- ## 📸 Screenshots
+
+### YouTube Video Enhancer
+
+![YouTube Video Enhancer](screenshots/youtube-enhancer-screenshot-1.png)
+
+### Enhancement Panel
+
+![Enhancement Panel](screenshots/youtube-enhancer-screenshot-2.png)
+
+### Presets
+
+![Enhancement Presets](screenshots/youtube-enhancer-screenshot-3.png)
+
 ## ⚙️ How It Works
 
 The enhancer detects the current YouTube video and applies lightweight CSS filters to improve its appearance.

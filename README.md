@@ -36,6 +36,10 @@ It adjusts:
 
 **Auto Enhance** automatically adjusts the strength based on the video's resolution. It does **not** change YouTube's video quality.
 
+### 🧪 Tested
+
+Tested with **Firefox** and **uBlock Origin**.
+
 ## 💡 Inspiration
 
 Inspired by [Kirchlive/youtube-sharpness-enhancer](https://github.com/Kirchlive/youtube-sharpness-enhancer).

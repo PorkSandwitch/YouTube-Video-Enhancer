@@ -40,7 +40,7 @@ It adjusts:
 
 Inspired by [Kirchlive/youtube-sharpness-enhancer](https://github.com/Kirchlive/youtube-sharpness-enhancer).
 
-Adapted and developed as me.
+Adapted and developed by me.
 
 ## 👨‍💻 Author
 

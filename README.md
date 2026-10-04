@@ -11,7 +11,6 @@ Install **Violentmonkey** for your browser.
 - 🦊 [Install Violentmonkey for Firefox](https://addons.mozilla.org/firefox/addon/violentmonkey/)
 - 🌐 [Install Violentmonkey for Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
 - 🔵 [Install Violentmonkey for Edge](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/eeagobfjdenkkddmbclomhiblgggliao)
-- 🟠 [Install Violentmonkey for Brave](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
 
 ### 2. Install YouTube Video Enhancer
 

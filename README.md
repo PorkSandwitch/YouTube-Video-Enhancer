@@ -4,15 +4,20 @@ A lightweight YouTube userscript that improves video clarity with minimal system
 
 ## 🚀 Installation
 
-### 1. Install Tampermonkey
+### 1. Install Violentmonkey
 
-[Install Tampermonkey](https://www.tampermonkey.net/)
+Install **Violentmonkey** for your browser.
+
+- 🦊 [Install Violentmonkey for Firefox](https://addons.mozilla.org/firefox/addon/violentmonkey/)
+- 🌐 [Install Violentmonkey for Chrome](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
+- 🔵 [Install Violentmonkey for Edge](https://microsoftedge.microsoft.com/addons/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
+- 🟠 [Install Violentmonkey for Brave](https://chromewebstore.google.com/detail/violentmonkey/jinjaccalgkegednnccohejagnlnfdag)
 
 ### 2. Install YouTube Video Enhancer
 
 **[⚡ Install YouTube Video Enhancer](https://raw.githubusercontent.com/PorkSandwitch/YouTube-Video-Enhancer/main/youtube-video-enhancer.user.js)**
 
-Tampermonkey will open the installation page. Click **Install** and you're done.
+Violentmonkey will open the installation page. Click **Install** and you're done.
 
 ## ✨ Features
 
@@ -52,7 +57,16 @@ It adjusts:
 
 ### 🧪 Tested
 
-Tested with **Firefox** and **uBlock Origin**.
+Tested with **Firefox and **uBlock Origin**.
+
+## 🌐 Browser Support
+
+- 🦊 Firefox
+- 🌐 Google Chrome
+- 🔵 Microsoft Edge
+- 🟠 Brave
+
+Requires **Violentmonkey**.
 
 ## 💡 Inspiration
 
